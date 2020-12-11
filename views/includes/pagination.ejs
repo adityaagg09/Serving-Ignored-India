@@ -1,0 +1,15 @@
+<section>
+    <% if(currentpage !== 1 && previouspage !==1) {%>
+    <a href="/productdetails/?page=1">1</a>
+    <%  } %>
+    <% if(previouspage) { %>
+        <a href="/productdetails/?page=<%=previouspage %>"><%= previouspage %></a>
+    <% } %>
+        <a href="/productdetails/?page=<%=currentpage %>"><%= currentpage %></a>
+    <% if(hasnextpage) { %>
+        <a href="/productdetails/?page=<%=nextpage %>"><%= nextpage %></a>
+    <% } %>
+    <% if(lastpage !== currentpage && nextpage !== lastpage) { %>
+        <a href="/productdetails/?page=<%=lastpage %>"><%= lastpage %></a>
+    <% } %>    
+</section>

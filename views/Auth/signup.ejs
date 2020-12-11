@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <% if(err) {%>
+        <div>
+            <%= err %>
+        </div>
+    <% }%>
+    <form action="/signup" method="POST" novalidate>
+        <div>
+            <label for="emaill">Email-id</label>
+            <input type="email" name="email" id="emaill" value="<%= oldinput.email %>">
+        </div>
+        <div>
+            <label for="pasl">Password</label>
+            <input type="password" name="password" id="pasl" value="<%= oldinput.password %>">
+        </div>
+        <div>
+            <label for="cnfl">Confirm Password</label>
+            <input type="password" name="cnfrmpass" id="cnfl" value="<%= oldinput.cnfrmpass %>">
+        </div>
+        <button type="submit">login</button>
+        <input type="hidden" name="_csrf" value="<%= toki %>">
+    </form>
+<%- include('../includes/end.ejs') %>

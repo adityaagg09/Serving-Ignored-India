@@ -1,0 +1,37 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    
+    <h1>Welcome to add new User We will soon add more</h1>
+    <hr>
+    <form action="/addingUser" method="POST">
+        <div>
+            <label for="namel">Name</label>
+            <input type="text" name="name" id="namel">
+        </div>
+        <div>
+            <label for="aadharl">Aadhar Number</label>
+            <input type="number" name="aadhar" id="aadharl" placeholder="X000 0000 0000 0000" required> 
+        </div>
+        <div>
+            <label for="dobl">Date Of Birth :- </label>
+            <input type="date" name="dob" id="dobl">
+        </div>
+        <div>
+            <label for="agel" >Age</label>
+            <input type="number" name="age" id="agel" min="1" max="100">
+        </div>
+        <div>
+            <label for="telll" >Mobile Number:- </label>
+            <input type="tel" name="tell" id="telll" value="8570936926">
+        </div>
+        <div>
+            <label for="passl" >Password</label>
+            <input type="password" name="password" id="passl">
+        </div>
+        <button type="submit">Submit</button>
+        <input type="hidden" name="_csrf" value="<%= toki %>">
+    </form>
+
+<%- include('../includes/end.ejs') %>

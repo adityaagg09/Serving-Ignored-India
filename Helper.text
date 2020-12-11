@@ -1,0 +1,27 @@
+1) Nodemon app ko deploy web p running k lia install krni padegi intially mein
+2) Extended false :- kyuki we want value as key value pair if we set it to true thn we will recieve as a string of arrray.
+3) Get: meaning the enter the direct link to it.
+4) Post:- meaning the redirect we occur to it by not directly linking to it :).
+5) __dirname  path join searches file which on this folder well inatial path is present socome out of it ../
+6) Jb multifile uthani hogi sysytemsetoh tb enctype use krna hoga form wala field mein 
+7) res.render aisa function ha agr hm apna templating engine define krenge toh toh jonsa name pass krenge ussi name kki ejs file ko search krega.
+8) <%= && <%- isme difference ???
+9) For the only Post route usde in form for eg. For deleting the Product
+10) Data we used for the Sending form will work only for the post request but it will not work for get data.
+11) And the / routes used for the params views will only show for the any other having similar path so better for it to place below or change the name of it.
+12) Agr loop k ander ho ek variable pass ha joo use ho usme tumhe , lga ke pass krna padeg ataaki wo include hojae waise pass ni hoga!
+13) If we set a particular thing inside our controllers like true or false it wiil be dead.
+14) The SESSION module is able to set a value to the req.session.{jo bhi set krna ha krlo koi dikkt ni ha !}= true/false.
+15) Agr koi bhi cheez set krte ho tum in req. something and post mein na data cange ho jata hr baari jaise req die kr jati ha waise hi toh tumhe sb mein set krke bhejna pdta ha or woh cheez locals se set hojayagi app.js wali mei.
+16) Dekh apne ko check krne ha jb request bhjeta ha koi ki woo bnda verified ha ki ni toh uski post request send hone se phle cnfrm krna hoga hme ki wo bnda verified ha ki ni!
+17) If we pass any value in the input type hidden we must access through it req.params
+18) If we pass it into the link /?(whatever) we access it through req.query. jo bhi ho skta ha!
+19) var is the variable whose value can be changed whereever u want.
+20) For passing integer values in some fields u must be converting the string into the number by adding the + sign ahead of it.
+21) Agr kisi ki id block marni ho toh apne ko 18 -> 6 Module ka custom wala Part lgana padega. ):
+22) Difference between Async code is the reverse of the Sync code :)
+23) Difference between Sync code is that it executes line by line without waitaing for any other function
+24) Outside just thorw new error  
+25)Well in inside of a function of then & catch block u need to just call -> next(new Error(err));
+26) Can status code to both render and .
+27)

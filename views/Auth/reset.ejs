@@ -1,0 +1,18 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <% if(err) { %>
+        <div>
+            <%= err %>
+        </div>
+        <%  } %>
+    <form action="/reset" method="POST">
+        <div>
+            <label for="emaill">Email-id</label>
+            <input type="email" name="email" id="emaill">
+        </div>
+        <input type="hidden" name="_csrf" value="<%= toki %>">
+        <button type="submit">Reset Password</button>
+    </form>
+<%- include('../includes/end.ejs') %>

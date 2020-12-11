@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <h2>Add Products as many for poor people</h2>
+    <form action="/<% if(edit) {%>editproduct<% } else { %>addproducts<% } %>" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="namel">Name</label>
+            <input type="text" name="name" id="namel" value="<% if(edit) {%> <%= product.name %> <% } %>">
+        </div>
+        <!--<div>
+            <label for="urll">Image Url</label>
+            <input type="url" name="imageUrl" id="urll" value="<% if(edit) {%> <%= product.imageUrl %> <% } %>">
+        </div>-->
+        <div>
+            <label for="urll">Image</label>
+            <input type="file" name="image" id="urll" >
+        </div>
+        <div>
+            <label for="pricel">Price</label>
+            <input type="text" name="price" id="pricel" value="<% if(edit) {%> <%= product.price %> <% } %>">
+        </div>
+        <div>
+            <label for="quan">Max Quantity</label>
+            <input type="text" name="maxquan" id="quan" value="<% if(edit) {%> <%= product.maxquan %> <% } %>">
+        </div>
+        <% if (edit) { %>
+            <input type="hidden" value="<%= product._id %>" name="prodId">
+        <% } %>
+        <button type="submit"><% if(edit) { %>Update Product<% } else { %>Edit Product<% } %></button>
+        <input type="hidden" name="_csrf" value="<%= toki %>">
+    </form>
+    
+<%- include('../includes/end.ejs') %>

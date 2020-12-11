@@ -1,0 +1,20 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <% if(err) { %>
+        <div>
+            <%= err %>
+        </div>
+        <%} %>
+    <form action="/newpass" method="POST">
+        <div>
+            <label for="pasl">Password</label>
+            <input type="password" name="password" id="pasl">
+        </div>
+        <button type="submit">Update Password</button>
+        <input type="hidden" name="userid" value="<%= userid %>">
+        <input type="hidden" name="_csrf" value="<%= toki %>">
+        <input type="hidden" name="tokento" value="<%= token %>">
+    </form>
+<%- include('../includes/end.ejs') %>

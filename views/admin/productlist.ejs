@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <h1>List Of All The Products Created</h1>
+    <main>
+        <% if(prods.length > 0)  { %>
+            <div>
+            <% for (let product of prods) { %>  
+                <article>
+                    <header>
+                        <h1><%= product.name %></h1>
+                    </header>
+                    <div>
+                        <img src="/<%= product.imageUrl %>">
+                    </div>
+                    <div>
+                        <h2>Rs <%= product.price %></h2>
+                    </div>
+                    <div>
+                        <h2>Max Quantity:- <%= product.maxquan%></h2>
+                    </div>
+                    <div>
+                    <input type="hidden" name="_csrf" value="<%= toki %>">
+                    <input type="hidden"  name="proId" value="<%= product._id %>">
+                        <a href="/productdetails/<%= product._id %>">Details</a>
+                        <a href="/editproduct/<%= product._id %>?edit=true">Edit </a>    
+                        <button type="submit" onclick="deletepro(this)">Delete</button> 
+                    </div>
+                </article>
+                <hr>
+            <% } %>
+            </div> 
+        <%- include('../includes/pagination.ejs' , {currentpage: currentpage, previouspage: previouspage, hasnextpage: hasnextpage,lastpage: lastpage,nextpage: nextpage}) %>                       
+        <form action="/productdetails" method="POST">
+            <input type="number" name="itemsper" type="submit" min="1">
+            <button type="submit">submit</button>
+            <input type="hidden" name="_csrf" value="<%= toki %>">             
+        </form>
+        <% } else { %>
+            <h1>No Products found!</h1> 
+        <% } %>
+
+    </main> 
+<%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script> 
