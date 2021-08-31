@@ -14,14 +14,14 @@ exports.postup=(req,res,next)=>{
 } 
 exports.getProduct=(req,res,next) =>{
     itemsperpage= +itemsperpage;
-    const page= +req.query.page || 1; // If we rendirect from another page then simly just page 1 must show up
-    let totalitems; // +ahead indicates that to convert it into the integer
-    Product.find().countDocuments() // count gives the total count of products
+    const page= +req.query.page || 1; // If we redirect from another page then simly just page 1 must show up
+    let totalitems;                   // + ahead indicates that to convert it into the integer
+    Product.find().countDocuments()   // count gives the total count of products
     .then(numprouducts =>{ 
       totalitems=numprouducts;
       return Product.find()
-      .skip((page-1)*itemsperpage) //Will gonna skip the page * itms/page 
-      .limit(itemsperpage); //the cursor will give us the no of items to be fetched
+      .skip((page-1)*itemsperpage) //Will skip the page * itms/page 
+      .limit(itemsperpage);        //the cursor will give us the no of items to be fetched
     })
     .then(products => {
     res.render('admin/productlist', {
@@ -36,10 +36,9 @@ exports.getProduct=(req,res,next) =>{
     });
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
-    }); 
+        const error=new Error(err); 
+        error.httpStatusCode=500;  
+        return next(error);      }); 
 };
 
 exports.getDetails=(req,res,next) =>{
@@ -52,10 +51,9 @@ exports.getDetails=(req,res,next) =>{
         });
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
-    });
+        const error=new Error(err); 
+        error.httpStatusCode=500;  
+        return next(error);      });
 };
 
 exports.getEdit = (req,res,next) => {
@@ -96,10 +94,9 @@ exports.postEdit=(req,res,next) => {
         res.redirect('/mainpage');
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
-    })
+        const error=new Error(err); 
+        error.httpStatusCode=500;  
+        return next(error);      })
 };
 
 exports.postDel=(req,res,next) => { 
@@ -110,8 +107,8 @@ exports.postDel=(req,res,next) => {
     })
     .catch(err => {
         res.status(500).json({message: 'Deleting Product Failed!'});
-        /*const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func*/
+        /*const error=new Error(err); 
+        error.httpStatusCode=500;  
+        return next(error);  */
     })
 };

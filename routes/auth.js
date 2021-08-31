@@ -1,8 +1,8 @@
-const express=require('express'); // Accsseing the path facility 
-const router=express.Router(); // Caaling the router facility from the express
+const express=require('express'); // Accessing the path facility 
+const router=express.Router(); // Calling the router facility from the express
 const authcontroller=require('../controllers/Auth');
 const checki=require('../Check/check');
-const { check , body }=require('express-validator/check');  // Java syntax which will re6=turn the functionality of the checking function
+const { check , body }=require('express-validator/check');  // Java syntax which will return the functionality of the checking function
 const User=require('../models/user');
 
 router.get('/login',authcontroller.getLogin);
@@ -29,7 +29,7 @@ router.post('/signup',
     check('email')
     .isEmail()
     .withMessage('Please enter a valid EMail adreess')
-    .custom((value, {req}) =>{  // value -> which we are getting {} gives from which this value can be extracted
+    .custom((value) =>{  // value -> which we are getting from {} 
         // if(value === 'a@a.com'){
         //     throw new Error('This id is banned');
         // }
@@ -37,14 +37,14 @@ router.post('/signup',
         return User.findOne({email: value})  // *<>* 
         .then(user => {
         if( user){
-          return Promise.reject('Email Adrees already found login with new'); // Reject basicaaly throw an error
+          return Promise.reject('Email Addrees already found login with new'); // Reject basically throw an error
         }
-    }) // return islia lia taaki hm age chck na kre or step by step verification hona chahie :)
+    })  
     })
     .normalizeEmail(),  // Convert the email into lowecase charaters
     body(
         'password',
-        'Please enter a valid password of min length 5'  // AIse krne se mssg apne app show krgais field mein ksisi bhi ror part k lia
+        'Please enter a valid password of min length 5'  // Error mssg when len is less than 5
         )
     .isLength({min: 5, max:6}) // Min length to be of 5
     .isAlphanumeric()
@@ -70,4 +70,4 @@ router.get('/reset/:token',authcontroller.getnewpa);
 
 router.post('/newpass',authcontroller.postpa);
 
-module.exports=router; //Module ka exports caal krke router ko bhej dia 
+module.exports=router;  

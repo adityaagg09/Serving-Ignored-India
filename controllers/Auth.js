@@ -1,11 +1,11 @@
-const crypto=require('crypto'); // Library used for genrting token for reset password
+const crypto=require('crypto'); // Library used for generating token for reset password
 const User=require('../models/user');
 const bcrypt=require('bcryptjs');
 const nodemailer=require('nodemailer');
 const sendgridtrans=require('nodemailer-sendgrid-transport');
 const { validationResult }=require('express-validator/check')
 
-const transporter=nodemailer.createTransport(sendgridtrans({// Calling the nodemailer and using create and passing sendgrid tool  
+const transporter=nodemailer.createTransport(sendgridtrans({ // Calling the nodemailer and using create and passing sendgrid tool  
     auth: {
         api_key: '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'
     }
@@ -13,6 +13,7 @@ const transporter=nodemailer.createTransport(sendgridtrans({// Calling the nodem
 
 exports.getLogin=(req,res,next) => {
     let message=req.flash('error');
+    console.log(message);
     if(message.length >0){
         message=message[0];
     }
@@ -24,7 +25,7 @@ exports.getLogin=(req,res,next) => {
         err: message,
         oldinput : {
             email: '',
-            password: ''
+            password: '' 
         }
     });
 };
@@ -36,7 +37,7 @@ exports.postLogin=(req,res,next) =>{
     if(!errors.isEmpty()){
         return res.status(422).render('Auth/login',{
             pageTitle: 'Login',
-            err: errors.array()[0].msg, // Gives us the errors whih we have got in an array format and returning the first error mssg !
+            err: errors.array()[0].msg, // Gives us the errors in an array format and returning the first error mssg
             oldinput : {
                 email: email,
                 password: password
@@ -54,7 +55,7 @@ exports.postLogin=(req,res,next) =>{
             console.log(domatch);
             if(domatch ) { 
                 req.session.user=yup;
-                req.session.isLoggedin=true; // True hojae sb jb login hojae
+                req.session.isLoggedin=true;  
                 return res.redirect('/mainpage');
             }
             //req.flash('error','Inalid Password'); // Using the flash functionality:- key and value pair to tell
@@ -62,13 +63,13 @@ exports.postLogin=(req,res,next) =>{
         })
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
+        const error=new Error(err);  
+        error.httpStatusCode=500; 
+        return next(error);   
     })
 };
 
-exports.postsignup=(req,res,next) =>{
+ exports.postsignup=(req,res,next) =>{
     const email=req.body.email;
     const password=req.body.password;
     const confirmp=req.body.cnfrmpass;
@@ -77,7 +78,7 @@ exports.postsignup=(req,res,next) =>{
         console.log(errorss.array());
         return res.status(422).render('Auth/signup',{
             pageTitle: 'Signup',
-            err: errorss.array()[0].msg, // Gives us the errors whih we have got in an array format and returning the first error mssg !
+            err: errorss.array()[0].msg, // Gives us the errors which we have got in an array format and returning the first error mssg !
             oldinput : {
                 email: email,
                 password: password,
@@ -85,7 +86,7 @@ exports.postsignup=(req,res,next) =>{
             }
         })
     }
-        bcrypt.hash(password,12) // Calling the hash functiona nd asking it to how many layers of enryption
+        bcrypt.hash(password,12) // Calling the hash functiona and asking it to how many layers of enryption
         .then(hashpas => {
             const users=new User({
                 email: email,
@@ -102,19 +103,17 @@ exports.postsignup=(req,res,next) =>{
                 html: '<h1>You Successfully Signed Up!</h1>'
             })
             .catch(err => {
-                const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-                error.httpStatusCode=500; // Status code set krne ka !!
-                return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
-                //console.log(err);
+                const error=new Error(err);  
+                error.httpStatusCode=500;  
+                return next(error);   
             });
         })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
+        const error=new Error(err);  
+        error.httpStatusCode=500;  
+        return next(error);   
     })
 };
-
 exports.getsignup=(req,res,next) =>{
     let message=req.flash('error');
     if(message.length>0){
@@ -135,7 +134,7 @@ exports.getsignup=(req,res,next) =>{
 };
 
 exports.getLogout=(req,res,next) => {
-    req.session.isLoggedin=false; // False hojae sb jb logout hojae
+    req.session.isLoggedin=false;  
     res.redirect('/login');
 };
 
@@ -167,7 +166,7 @@ exports.postreset=(req,res,next) => {
                 res.redirect('/reset');
             }
             user.reseToken=token;
-            user.tokenexp=Date.now()+ 300000 ; // Time is in millisecond*1000 =sec :)
+            user.tokenexp=Date.now()+ 300000 ;   
             return user.save();
         })
         .then(result =>{
@@ -181,12 +180,12 @@ exports.postreset=(req,res,next) => {
                 <p>Click this <a href="http://localhost:7000/reset/${token}">link</a> to set a new password</p>
                 <p>Link is valid for only 5 minutes </p>
                 `
-            }) // Multiple line string mein agr hme koi value pass krni ho ya access krni ho!!!      
+            })     
         })
         .catch(err => {
-            const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-            error.httpStatusCode=500; // Status code set krne ka !!
-            return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
+            const error=new Error(err);  
+            error.httpStatusCode=500;  
+            return next(error);   
             //console.log(err);
         });
     })
@@ -211,9 +210,9 @@ exports.getnewpa=(req,res,next)=> {
     });
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
+        const error=new Error(err);  
+        error.httpStatusCode=500;  
+        return next(error);   
     })
 };
 
@@ -241,8 +240,8 @@ exports.postpa=(req,res,next)=>{
         res.redirect('/login');
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
+        const error=new Error(err);  
+        error.httpStatusCode=500;  
+        return next(error);   
     })
 }

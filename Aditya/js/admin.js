@@ -1,7 +1,7 @@
 const deletepro = (btn) => {
   const prodId = btn.parentNode.querySelector('[name=proId]').value;
   const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
-  const proele=btn.closest('article'); //
+  const proele=btn.closest('article'); 
 
   fetch('/deletepro/' + prodId , {
     method: 'DELETE',

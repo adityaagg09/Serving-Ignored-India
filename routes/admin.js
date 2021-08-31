@@ -18,4 +18,4 @@ router.get('/addproducts',check.logcheck,datacontroller.getAddProduct);
 router.post('/addproducts',check.logcheck,datacontroller.postAddProduct);
 
 
-module.exports=router; //Module ka exports caal krke router ko bhej dia 
+module.exports=router; // Exporting routes

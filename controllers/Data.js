@@ -8,7 +8,7 @@ exports.getAdduser=(req,res,next) => {
 
 exports.postAddProduct=(req,res,next) =>{
     const name=req.body.name;
-    const image=req.file; // Extracting the file document's
+    const image=req.file;  // Extracting the file document's
     const price=req.body.price;
     const max=req.body.maxquan;
     console.log(image);
@@ -32,9 +32,9 @@ exports.postAddProduct=(req,res,next) =>{
         res.redirect('/mainpage');
     })
     .catch(err => {
-        const error=new Error(err); // Tellin it to new eeror has been developed and making sure that error ha been occured
-        error.httpStatusCode=500; // Status code set krne ka !!
-        return next(error);  // This will call our 500 error page bcz we tell him to do so when er pass error spl func
+        const error=new Error(err); 
+        error.httpStatusCode=500;  
+        return next(error);   
     })
 }; 
 
